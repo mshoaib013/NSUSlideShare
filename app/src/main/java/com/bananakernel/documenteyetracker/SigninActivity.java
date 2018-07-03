@@ -40,6 +40,7 @@ public class SigninActivity extends AppCompatActivity implements
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class SigninActivity extends AppCompatActivity implements
         int i = v.getId();
         if (i == R.id.btn_signin_google) {
             Toast.makeText(SigninActivity.this,"Click",Toast.LENGTH_SHORT).show();
-            signIn("shoaib.mehedi@gmail.com","mshoaib1");
+            signIn("shoaib.mehedi.7@gmail.com","mshoaib1");
             //signOut();
         }
         else if (i == R.id.btn_signin){
@@ -93,7 +94,6 @@ public class SigninActivity extends AppCompatActivity implements
         }
         super.onStart();
     }
-
     public void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,6 +103,9 @@ public class SigninActivity extends AppCompatActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            Intent intent=new Intent(SigninActivity.this,MainActivity.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

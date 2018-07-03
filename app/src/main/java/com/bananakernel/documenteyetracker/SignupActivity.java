@@ -42,10 +42,10 @@ public class SignupActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_signup);
-        WebView myWebView = (WebView) findViewById(R.id.signup_webview);//webview
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl("http://192.168.1.1");
+//        WebView myWebView = (WebView) findViewById(R.id.signup_webview);//webview
+//        WebSettings webSettings = myWebView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//        myWebView.loadUrl("http://192.168.1.1");
 
         findViewById(R.id.btn_signup_google).setOnClickListener(this);
         findViewById(R.id.btn_signup).setOnClickListener(this);

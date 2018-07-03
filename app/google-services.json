@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "635942811323",
-    "firebase_url": "https://nsu-slides.firebaseio.com",
-    "project_id": "nsu-slides",
-    "storage_bucket": "nsu-slides.appspot.com"
+    "project_number": "603965086262",
+    "firebase_url": "https://nsuslideshare.firebaseio.com",
+    "project_id": "nsuslideshare",
+    "storage_bucket": "nsuslideshare.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:635942811323:android:981e24787f04d7dd",
+        "mobilesdk_app_id": "1:603965086262:android:981e24787f04d7dd",
         "android_client_info": {
           "package_name": "com.bananakernel.documenteyetracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "635942811323-v007dcnbfol590vvl05duhhshbe55msa.apps.googleusercontent.com",
+          "client_id": "603965086262-cksbfisa9sq2uedc9ri1m5lcbv1ls7fc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bananakernel.documenteyetracker",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "635942811323-0ufcfejmf0bg2i9m5kig50qbe3g0nhii.apps.googleusercontent.com",
+          "client_id": "603965086262-4q0efploutpcvi6vtj3bjtadm78jd9gj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAt8GL-MLt-8MU_-vSqNfWn8xc49FfTR2w"
+          "current_key": "AIzaSyB9VjGj2nkgjbpMwNROxBL-fylYxdP3t_E"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "635942811323-0ufcfejmf0bg2i9m5kig50qbe3g0nhii.apps.googleusercontent.com",
+              "client_id": "603965086262-4q0efploutpcvi6vtj3bjtadm78jd9gj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

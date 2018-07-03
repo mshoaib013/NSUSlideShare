@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
             android:layout_margin="@dimen/container_layout_margin"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <TextView
@@ -158,10 +158,10 @@
                     android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
-        <WebView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/signup_webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <!--<WebView xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:id="@+id/signup_webview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
 
 
     </RelativeLayout>
