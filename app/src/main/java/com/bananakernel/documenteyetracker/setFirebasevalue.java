@@ -16,7 +16,7 @@ public class setFirebasevalue {
     public void set(){
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("DEPT");
-        myRef.child("OTHERS").child("Slides").child("POL101").child("Chapter 3").setValue("https://drive.google.com/open?id=1E46qDINjRT6l_-xomUq9fXFQdgL7l1u8");
+        myRef.child("OTHERS").child("Slides").child("POL101").child("Chapter 4").setValue("https://drive.google.com/open?id=1E46qDINjRT6l_-xomUq9fXFQdgL7l1u8");
         Toast.makeText(context,"hello", Toast.LENGTH_SHORT).show();
     }
 }

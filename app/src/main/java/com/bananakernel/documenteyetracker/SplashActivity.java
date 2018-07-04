@@ -5,22 +5,17 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.bananakernel.documenteyetracker.databinding.ActivitySplashBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
     boolean loggedIn=false;
     ActivitySplashBinding binding;
     setFirebasevalue setFirebasevalue = new setFirebasevalue(SplashActivity.this);
+    readFromFirebase readFromFirebase = new readFromFirebase(SplashActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +28,8 @@ public class SplashActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        }
 
-        setFirebasevalue.set();
+//        setFirebasevalue.set();
+        readFromFirebase.read();
 //        myRef.setValue("Fuck, World!");
 //        read();
     }
