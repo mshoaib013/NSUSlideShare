@@ -78,6 +78,11 @@ public class SignupActivity extends AppCompatActivity implements
         if (i == R.id.btn_signup_google) {
             Toast.makeText(SignupActivity.this,"working",Toast.LENGTH_SHORT).show();
             createAccount("shoaib.mehedi@gmail.com","mshoaib1");
+
+            String url = "http://192.168.1.111/androidReastApi/?";
+            url = url+String.valueOf(nameEditText.getText());
+            WebView myWebView = (WebView) findViewById(R.id.webview);
+            myWebView.loadUrl(url);
             //signOut();
         }
         if (i == R.id.btn_signup) {

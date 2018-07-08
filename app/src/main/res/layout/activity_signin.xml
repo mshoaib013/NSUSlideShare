@@ -16,6 +16,7 @@
                 android:paddingStart="@dimen/ic_nav_padding_start"
                 android:src="@drawable/ic_back"
                 android:onClick="goToSplash" />
+
         </android.support.v7.widget.Toolbar>
         <RelativeLayout
             android:id="@+id/containerLayout"
