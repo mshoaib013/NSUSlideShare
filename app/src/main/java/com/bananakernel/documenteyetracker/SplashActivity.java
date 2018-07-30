@@ -5,52 +5,32 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.bananakernel.documenteyetracker.databinding.ActivitySplashBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
     boolean loggedIn=false;
     ActivitySplashBinding binding;
     setFirebasevalue setFirebasevalue = new setFirebasevalue(SplashActivity.this);
     readFromFirebase readFromFirebase = new readFromFirebase(SplashActivity.this);
+    String firebaseTest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_splash);
 
-//        getCurrentUser();
-//        if (loggedIn)
-//        {
-//            Intent intent=new Intent(SplashActivity.this,MainActivity.class);
-//            startActivity(intent);
-//        }
-
-//        setFirebasevalue.set();
-        readFromFirebase.read();
-//        myRef.setValue("Fuck, World!");
-//        read();
+//        readFromFirebase.read();
     }
 
-//    public void read(){
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d("data read working", "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w("data read not working", "Failed to read value.", error.toException());
-//            }
-//        });
-//    }
 
     public void signin(View view)
     {
@@ -68,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
             String name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
+
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();

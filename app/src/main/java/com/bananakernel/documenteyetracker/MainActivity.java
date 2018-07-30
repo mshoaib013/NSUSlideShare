@@ -1,11 +1,13 @@
 package com.bananakernel.documenteyetracker;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,14 +23,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    ArrayList<String> arrayList = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
     private ArrayAdapter<String> listAdapter ;
+    final ArrayList<String> chapterlist = new ArrayList<String>();
+
+    readFromFirebase readFromFirebase = new readFromFirebase(MainActivity.this);
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("DEPT").child("ECE").child("Slides").child("CSE115");
     private ListView listView;
     private TextView mTextMessage;
+    int i=0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         hide();
+        listView = (ListView) findViewById(R.id.chapterlistview);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,20 +110,58 @@ public class MainActivity extends AppCompatActivity
 
         //listview
         listView = (ListView) findViewById( R.id.chapterlistview );
-        String[] chapters = new String[] { "Chapter one", "Chapter two", "Chapter three", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        final ArrayList<String> chapterlist = new ArrayList<String>();
-        chapterlist.addAll(Arrays.asList(chapters));
-        listAdapter = new ArrayAdapter<String>(this, R.layout.listview, chapterlist);
-        listView.setAdapter(listAdapter);
 
 
+//        chapterlist.addAll(Arrays.asList(chapters));
+//        myRef.orderByKey();
+        myRef.orderByValue().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String key=dataSnapshot.getKey();
+                arrayList.add(key);
+                String value = dataSnapshot.getValue(String.class);
+//                Map<String, Object> map = (Map<String, Object>) dataSnapshot.child(key).getValue();
+
+//                arrayList.add(String.valueOf(map));
+//                String value = String.valueOf(map);
+                chapterlist.add(value);
+                Log.d("aha", String.valueOf(value));
+                Collections.sort(arrayList);
+                arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
+                listView.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+//        listAdapter = new ArrayAdapter<String>(this, R.layout.listview, chapterlist);
+//        listView.setAdapter(listAdapter);
+//
+//
 
         //
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,String.valueOf(position),Toast.LENGTH_SHORT).show();
+                String temp = chapterlist.get(position);
+                Toast.makeText(MainActivity.this,String.valueOf(position)+" "+temp,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,6 +176,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

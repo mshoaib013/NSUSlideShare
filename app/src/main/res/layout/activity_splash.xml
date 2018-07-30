@@ -18,6 +18,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/firebasetest"
                 android:textColor="@color/black_color"
                 android:textSize="28sp"
                 android:fontFamily="monospace"
