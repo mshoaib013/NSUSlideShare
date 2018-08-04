@@ -1,6 +1,11 @@
 package com.bananakernel.documenteyetracker;
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -30,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
     readFromFirebase readFromFirebase = new readFromFirebase(MainActivity.this);
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("DEPT").child("ECE").child("Slides").child("CSE115");
+    DatabaseReference myRef = database.getReference("DEPT").child("ECE").child("Slides").child("CSE225");
     private ListView listView;
     private TextView mTextMessage;
     int i=0;
@@ -76,6 +83,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +111,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         //***********************************************************************************************fullscreen design
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -162,8 +172,29 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp = chapterlist.get(position);
                 Toast.makeText(MainActivity.this,String.valueOf(position)+" "+temp,Toast.LENGTH_SHORT).show();
+                Uri uri = Uri.parse(temp);
+                long downloadReference;
+
+                // Create request for android download manager
+                DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+
+
+                //Setting title of request
+                request.setTitle("Data Download");
+
+                //Setting description of request
+                request.setDescription("Android Data download using DownloadManager.");
+
+                //Set the local destination for the downloaded file to a path within the application's external files directory
+                request.setDestinationInExternalFilesDir(MainActivity.this, Environment.DIRECTORY_DOWNLOADS,arrayList.get(position)+".pdf");
+
+                //Enqueue download and save into referenceId
+                downloadReference = downloadManager.enqueue(request);
+
             }
         });
+
 
     }
 
